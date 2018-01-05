@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<fragment version="1">
+
+  <extension target="application#MODULE">
+    <module>
+      <ejb>${bundle.fileName}</ejb>
+    </module>
+  </extension>
+
+  <extension target="web#FILTER">
+
+    <filter>
+      <display-name>Nuxeo Sudo Filter</display-name>
+      <filter-name>NuxeoSudoFilter</filter-name>
+      <filter-class>com.nuxeo.filter.SudoFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+      <filter-name>NuxeoSudoFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+      <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <!-- active user switch in auth filter -->
+    <filter-mapping>
+      <filter-name>NuxeoAuthenticationFilter</filter-name>
+      <url-pattern>/swuser</url-pattern>
+      <dispatcher>REQUEST</dispatcher>
+      <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+  </extension>
+
+</fragment>
+
